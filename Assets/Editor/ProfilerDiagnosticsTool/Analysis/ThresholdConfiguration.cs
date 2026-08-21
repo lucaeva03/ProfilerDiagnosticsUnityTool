@@ -26,10 +26,17 @@ namespace ProfilerDiagnosticsTool.Analysis
 			var defaults = new Dictionary<MetricName, MetricThreshold>
 			{
 				{ MetricName.FrameTime, new MetricThreshold(MetricName.FrameTime, 16.7f, 33.4f) },
-				{ MetricName.DrawCalls, new MetricThreshold(MetricName.DrawCalls, 100f, 200f) },
+				{ MetricName.DrawCalls, new MetricThreshold(MetricName.DrawCalls, 100f, 155f) },
 				{ MetricName.GcAlloc, new MetricThreshold(MetricName.GcAlloc, 2.5f, 5.0f) },
 				{ MetricName.Triangles, new MetricThreshold(MetricName.Triangles, 600000f, 1200000f) },
 				{ MetricName.Memory, new MetricThreshold(MetricName.Memory, 450f, 900f) },
+
+				// Test
+				//{ MetricName.FrameTime, new MetricThreshold(MetricName.FrameTime, 24.5f, 27f) },
+				//{ MetricName.DrawCalls, new MetricThreshold(MetricName.DrawCalls, 100f, 155f) },
+				//{ MetricName.GcAlloc, new MetricThreshold(MetricName.GcAlloc, 2.5f, 5.0f) },
+				//{ MetricName.Triangles, new MetricThreshold(MetricName.Triangles, 600000f, 1200000f) },
+				//{ MetricName.Memory, new MetricThreshold(MetricName.Memory, 450f, 900f) },
 			};
 
 			return new ThresholdConfiguration(defaults);

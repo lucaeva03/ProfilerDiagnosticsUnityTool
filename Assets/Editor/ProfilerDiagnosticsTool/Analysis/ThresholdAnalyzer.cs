@@ -8,8 +8,7 @@ namespace ProfilerDiagnosticsTool.Analysis
 
 	// Compares a ProfilerSession against a ThresholdConfiguration and
 	// produces a per-metric verdict. Driver statistic is mean for
-	// FrameTime/DrawCalls/Triangles, max for GcAlloc/Memory (see
-	// Fase 3.1 design doc for the rationale).
+	// FrameTime/DrawCalls/Triangles, max for GcAlloc/Memory
 
 	public sealed class ThresholdAnalyzer : IAnalyzer
 	{
@@ -52,7 +51,7 @@ namespace ProfilerDiagnosticsTool.Analysis
 					supportingStats: new Dictionary<string, float>(),
 					excludedInvalidFrames: excludedInvalidFrames,
 					status: null,
-					suggestion: "Nessun dato disponibile: tutti i campioni per questa metrica sono invalidi (-1).");
+					suggestion: "No data available: every sample for this metric is invalid (-1).");
 			}
 
 			MetricThreshold threshold = thresholds.Get(metric);
@@ -99,20 +98,20 @@ namespace ProfilerDiagnosticsTool.Analysis
 
 		private static string BuildSuggestion(MetricName metric, SemaphoreStatus status)
 		{
-			string severity = status == SemaphoreStatus.Critical ? "critico" : "in avvicinamento alla soglia critica";
+			string severity = status == SemaphoreStatus.Critical ? "critical" : "approaching the critical threshold";
 
 			switch (metric)
 			{
 				case MetricName.FrameTime:
-					return $"Frame Time {severity}: verificare le altre metriche (Draw Calls, GC, Triangoli), il Frame Time è un indicatore composito delle altre quattro.";
+					return $"Frame Time {severity}: check the other metrics (Draw Calls, GC, Triangles); Frame Time is a composite indicator of the other four.";
 				case MetricName.DrawCalls:
-					return $"Draw Calls {severity}: valutare Material Property Batching (T2) o Draw Call Reduction tramite Static/Dynamic Batching e GPU Instancing (T5).";
+					return $"Draw Calls {severity}: consider Material Property Batching (T2) or Draw Call Reduction via Static/Dynamic Batching and GPU Instancing (T5).";
 				case MetricName.GcAlloc:
-					return $"GC Allocations {severity}: valutare tecniche di GC Management, in particolare object pooling e riduzione delle allocazioni per frame (T4).";
+					return $"GC Allocations {severity}: consider GC Management techniques, in particular object pooling and reducing per-frame allocations (T4).";
 				case MetricName.Triangles:
-					return $"Numero di triangoli {severity}: valutare tecniche di Geometry Culling per gli oggetti non visibili o fuori scena (T6).";
+					return $"Triangle count {severity}: consider Geometry Culling techniques for objects that are not visible or out of view (T6).";
 				case MetricName.Memory:
-					return $"Memoria totale {severity}: valutare ottimizzazione di Post-processing/Anti-Aliasing e qualità texture (T1).";
+					return $"Total memory {severity}: consider optimizing Post-processing/Anti-Aliasing and texture quality (T1).";
 				default:
 					return null;
 			}
