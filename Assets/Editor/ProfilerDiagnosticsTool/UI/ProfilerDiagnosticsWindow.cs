@@ -404,7 +404,7 @@ namespace ProfilerDiagnosticsTool.UI
 			_thresholdsScroll = EditorGUILayout.BeginScrollView(_thresholdsScroll);
 
 			EditorGUILayout.HelpBox(
-				"Default values are derived from the empirical analysis on the Infotainment project (Phase 2.6). They are fully editable and persisted across Editor sessions.",
+				"Default values are derived from the empirical analysis on the Infotainment project. They are fully editable and persisted across Editor sessions.",
 				MessageType.Info);
 			EditorGUILayout.Space(8);
 
